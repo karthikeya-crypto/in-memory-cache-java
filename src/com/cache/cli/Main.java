@@ -24,6 +24,7 @@ public class Main {
         //System.out.println("Get 2: " + cache.get(2));
         System.out.println("Get 1: " + cache.get(1));
         //System.out.println("Get 3: " + cache.get(3));
+        cache.shutdown();
     }
 }
 
