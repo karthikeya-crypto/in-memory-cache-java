@@ -10,7 +10,7 @@ This project was designed to understand real-world backend caching concepts such
 - PriorityQueue-based scheduling
 - Thread-safe shared data access
 
-Inspired by backend systems used in technologies like **Redis** and **Caffeine**.
+Inspired by backend caching concepts used in modern caching systems like **redis**.
 
 ---
 
@@ -128,12 +128,14 @@ Added synchronized critical sections using a shared lock.
 
 ## Time Complexity
 
-| Operation      | Complexity |
-|----------------|------------|
-| `get()`        | O(1)       |
-| `set()`        | O(1)       |
-| TTL insert     | O(log n)   |
-| Expiry cleanup | O(log n)   |
+## Time Complexity
+
+| Operation | Complexity |
+|----------|------------|
+| `get()` | O(1) average |
+| `set()` without TTL | O(1) |
+| `set()` with TTL | O(log n) |
+| Expiry cleanup | O(log n) |
 
 ---
 
@@ -164,7 +166,17 @@ src/
 ```
 
 ---
+## Validation Performed
 
+The cache behavior was manually verified for:
+
+- LRU eviction correctness
+- Lazy TTL expiration during reads
+- Active TTL expiration using background cleanup
+- Updating a key with a new TTL
+- Duplicate expiry entry handling
+- Expired key cleanup before eviction
+  
 ## Tradeoffs / Limitations
 
 Current implementation has some tradeoffs:
